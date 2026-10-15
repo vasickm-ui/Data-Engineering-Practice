@@ -15,3 +15,5 @@ __pycache__/
 
 # Local data and logs
 *.log
+
+nifi-localhost.cer
