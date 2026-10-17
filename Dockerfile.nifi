@@ -1,0 +1,11 @@
+FROM apache/nifi:2.4.0
+
+USER root
+
+RUN curl -fSL https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-hadoop-libraries-nar/2.4.0/nifi-hadoop-libraries-nar-2.4.0.nar \
+    -o /opt/nifi/nifi-current/lib/nifi-hadoop-libraries-nar-2.4.0.nar \
+    && curl -fSL https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-hadoop-nar/2.4.0/nifi-hadoop-nar-2.4.0.nar \
+    -o /opt/nifi/nifi-current/lib/nifi-hadoop-nar-2.4.0.nar \
+    && chown nifi:nifi /opt/nifi/nifi-current/lib/nifi-hadoop-libraries-nar-2.4.0.nar /opt/nifi/nifi-current/lib/nifi-hadoop-nar-2.4.0.nar
+
+USER nifi
