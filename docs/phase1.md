@@ -4,7 +4,7 @@
 
 - **Source:** Bluesky Jetstream (see [data/sources.md](data/sources.md))
 - **Registration / keys:** not required, the stream is public
-- **Streaming check:** WebSocket connection to `wss://jetstream2.us-east.bsky.network/subscribe?wantedCollections=app.bsky.feed.post` (Postman → New → WebSocket)
+- **Streaming check:** WebSocket connection to `wss://jetstream2.us-east.bsky.network/subscribe?wantedCollections=app.bsky.feed.post` (in Postman: New, WebSocket)
 - **Python check:** `ingestion/bluesky_stream.py`, using the `websockets` library
 
 ## Event envelope
