@@ -1,13 +1,13 @@
 services:
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
-    container_name: taxi-namenode
+    container_name: bluesky-namenode
     restart: unless-stopped
     ports:
       - "9870:9870"
       - "9000:9000"
     environment:
-      CLUSTER_NAME: taxi-cluster
+      CLUSTER_NAME: bluesky-cluster
       CORE_CONF_fs_defaultFS: hdfs://namenode:9000
       HDFS_CONF_dfs_replication: "1"
       HDFS_CONF_dfs_namenode_datanode_registration_ip___hostname_check: "false"
@@ -18,7 +18,7 @@ services:
 
   datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
-    container_name: taxi-datanode
+    container_name: bluesky-datanode
     restart: unless-stopped
     depends_on:
       - namenode
@@ -38,7 +38,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nifi
-    container_name: taxi-nifi
+    container_name: bluesky-nifi
     restart: unless-stopped
     ports:
       - "8443:8443"
@@ -47,7 +47,7 @@ services:
       SINGLE_USER_CREDENTIALS_USERNAME: ${NIFI_USERNAME:?Set NIFI_USERNAME in .env}
       SINGLE_USER_CREDENTIALS_PASSWORD: ${NIFI_PASSWORD:?Set NIFI_PASSWORD in .env}
     volumes:
-      - ./raw:/opt/nifi/nifi-current/input:ro
+      - ./ingestion:/opt/nifi/nifi-current/input:ro
       - nifi_conf:/opt/nifi/nifi-current/conf
       - nifi_state:/opt/nifi/nifi-current/state
       - nifi_database:/opt/nifi/nifi-current/database_repository
@@ -60,7 +60,7 @@ services:
   
   kafka:
     image: apache/kafka:latest
-    container_name: taxi-kafka
+    container_name: bluesky-kafka
     restart: unless-stopped
     ports:
       - "9092:9092"

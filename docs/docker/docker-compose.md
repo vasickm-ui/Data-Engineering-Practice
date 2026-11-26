@@ -66,6 +66,5 @@ Other settings:
 
 1. Kafka has no volume, so topics and messages are lost when the container is recreated (`docker compose down`). Adding `kafka_data:/var/lib/kafka/data` fixes this.
 2. The `apache/kafka:latest` image is not pinned and can change on the next pull. A fixed version such as `apache/kafka:3.9.1` is safer.
-3. Container names (`taxi-*`) are left over from the taxi dataset.
-4. NiFi has no `depends_on` for `namenode` and `kafka`, so flows may report errors if NiFi starts first.
-5. The `./raw` mount is only needed for the local file flow, since Bluesky data arrives over WebSocket.
+3. NiFi has no `depends_on` for `namenode` and `kafka`, so flows may report errors if NiFi starts first.
+4. The `./raw` mount is only needed for the local file flow, since Bluesky data arrives over WebSocket.
